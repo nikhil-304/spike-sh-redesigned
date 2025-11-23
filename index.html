@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spike.sh - Redesign</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center transition-all duration-300">
+            <div class="flex items-center gap-2">
+                <div class="bg-blue-600 text-white p-1 rounded">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <span class="font-bold text-xl text-gray-900 tracking-tight">spike.sh</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8 font-medium text-gray-600 text-sm">
+                <a href="https://leetcode.com/u/Nikhil-Shrivastava/" target="_blank" class="hover:text-blue-600 transition">Product</a>
+                <a href="https://www.naukri.com/code360/profile/NikhilShri" target="_blank" class="hover:text-blue-600 transition">Pricing</a>
+                <a href="https://github.com/nikhil-304"  target="_blank" class="hover:text-blue-600 transition">Integrations</a>
+                <a href="https://x.com/nikhilshri304"  target="_blank" class="hover:text-blue-600 transition">Changelog</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="https://drive.google.com/file/d/1zZ0h2ZRyoXy4ErjgUiAWSWHcUmxAWsaJ/view" target="_blank" class="text-gray-900 font-semibold text-sm hidden md:block">Login</a>
+                <a href="mailto:nikhil.shrivastava304@gmail.com?subject=Hiring%20Opportunity%3A%20Frontend%20Internship%20%26%20AI-Assisted%20Full%20Stack%20Developer&body=Dear%20Nikhil%2C%0A%0AI%20recently%20visited%20your%20Spike.sh%20redesigned%20website%20and%20was%20thoroughly%20impressed%20by%20its%20clean%20UI%2FUX%2C%20innovative%20design%2C%20smooth%20animations%2C%20and%20overall%20awesomeness.%20As%20a%20recruiter%2C%20I%20believe%20your%20skills%20would%20be%20a%20great%20fit%20for%20our%20team.%0A%0AI%27d%20like%20to%20discuss%20potential%20opportunities%20for%20you%20in%20a%20Frontend%20Internship%20or%20AI-Assisted%20Full%20Stack%20Developer%20role.%20Please%20let%20me%20know%20your%20availability%20for%20a%20call%20or%20meeting.%0A%0ALooking%20forward%20to%20hearing%20from%20you.%0A%0ABest%20regards%2C%0A[Your%20Name]%0A[Your%20Position]%0A[Company%20Name]%0A[Contact%20Information]" target="_blank" class="bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-700 transition whitespace-nowrap">Get started</a>
+
+                <!-- Hamburger Button -->
+                <button id="menu-btn" class="md:hidden text-gray-600 text-2xl focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden">
+            <div class="px-6 py-6 flex flex-col space-y-4 font-medium text-gray-700">
+                <a href="https://leetcode.com/u/Nikhil-Shrivastava/" target="_blank" class="hover:text-blue-600 transition border-b border-gray-100 pb-2">Product</a>
+                <a href="https://www.naukri.com/code360/profile/NikhilShri" target="_blank" class="hover:text-blue-600 transition border-b border-gray-100 pb-2">Pricing</a>
+                <a href="https://github.com/nikhil-304"  target="_blank" class="hover:text-blue-600 transition border-b border-gray-100 pb-2">Integrations</a>
+                <a href="https://x.com/nikhilshri304"  target="_blank" class="hover:text-blue-600 transition border-b border-gray-100 pb-2">Changelog</a>
+                <div class="pt-2">
+                    <a href="https://drive.google.com/file/d/1zZ0h2ZRyoXy4ErjgUiAWSWHcUmxAWsaJ/view" target="_blank" class="block text-blue-600 font-bold">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-28 pb-12 px-4 md:px-6">
+
+        <div class="max-w-7xl mx-auto hero-box shadow-2xl">
+
+            <!-- Left Side: Text & Interaction -->
+            <div class="w-full lg:w-1/2 p-8 md:p-16 flex flex-col justify-center relative z-20">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-blue-500/20 border border-blue-400/30 text-blue-100 px-3 py-1 rounded-full text-xs font-semibold w-fit">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        Real-time Monitoring
+                    </div>
+
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span>Spike calls your team</span>
+
+                            <!-- Call UI -->
+                            <div id="call-ui" class="call-capsule hidden m-0">
+                                <div id="call-badge" class="status-badge">Incident Triggered!</div>
+                                <div id="call-content" class="flex items-center gap-3">
+                                    <div class="flex flex-col leading-tight">
+                                        <span class="text-[10px] text-gray-400 font-medium">Spike Alert</span>
+                                        <span class="text-sm font-bold">Incoming Call...</span>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button onclick="rejectCall()" class="btn-action btn-reject"><i class="fa-solid fa-phone-slash"></i></button>
+                                        <button onclick="acceptCall()" class="btn-action btn-accept"><i class="fa-solid fa-phone"></i></button>
+                                    </div>
+                                </div>
+                                <div id="resolved-content" class="hidden items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
+                                        <i class="fa-solid fa-check text-white text-sm"></i>
+                                    </div>
+                                    <div class="flex flex-col leading-tight">
+                                        <span class="text-[10px] text-green-400 font-bold uppercase tracking-wider">Success</span>
+                                        <span class="text-sm font-bold text-white">Incident Resolved</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            when things go wrong.
+                        </div>
+                    </h1>
+
+                    <p class="text-blue-100 text-lg max-w-md">
+                        Spike alerts you of incidents before your customers do. Get real-time alerts on Phone calls, SMS, Slack, Microsoft Teams, and more for 80+ integrations
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="https://drive.google.com/file/d/1zZ0h2ZRyoXy4ErjgUiAWSWHcUmxAWsaJ/view" target="_blank" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-50 transition w-full sm:w-auto inline-block text-center">Get Started</a>
+                        <a href="mailto:nikhil.shrivastava304@gmail.com?subject=Hiring%20Opportunity%3A%20Frontend%20Internship%20%26%20AI-Assisted%20Full%20Stack%20Developer&body=Dear%20Nikhil%2C%0A%0AI%20recently%20visited%20your%20Spike.sh%20redesigned%20website%20and%20was%20thoroughly%20impressed%20by%20its%20clean%20UI%2FUX%2C%20innovative%20design%2C%20smooth%20animations%2C%20and%20overall%20awesomeness.%20As%20a%20recruiter%2C%20I%20believe%20your%20skills%20would%20be%20a%20great%20fit%20for%20our%20team.%0A%0AI%27d%20like%20to%20discuss%20potential%20opportunities%20for%20you%20in%20a%20Frontend%20Internship%20or%20AI-Assisted%20Full%20Stack%20Developer%20role.%20Please%20let%20me%20know%20your%20availability%20for%20a%20call%20or%20meeting.%0A%0ALooking%20forward%20to%20hearing%20from%20you.%0A%0ABest%20regards%2C%0A[Your%20Name]%0A[Your%20Position]%0A[Company%20Name]%0A[Contact%20Information]" class="border border-blue-400 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700/50 transition w-full sm:w-auto inline-block text-center">Book a Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Orbit System -->
+            <div class="w-full lg:w-1/2 relative bg-blue-700/20 orbit-wrapper">
+                <div class="orbit-system" id="orbit-container">
+
+                    <!-- Track -->
+                    <div class="orbit-track track-1"></div>
+
+                    <!-- Hub -->
+                    <div class="spike-hub">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="1460 1270 100 100" width="60" height="60" class="text-blue-600">
+                             <path id="Vector_7" fill-rule="evenodd" clip-rule="evenodd" d="M1546.73 1279.68C1546.73 1274.96 1542.9 1271.14 1538.18 1271.14H1469.82C1465.1 1271.14 1461.27 1274.96 1461.27 1279.68V1352.32C1461.27 1357.04 1465.1 1360.86 1469.82 1360.86H1538.18C1542.9 1360.86 1546.73 1357.04 1546.73 1352.32V1279.68ZM1498.61 1301.57C1500.24 1303.28 1502.27 1304.13 1504.71 1304.13C1507.09 1304.13 1509.07 1303.28 1510.64 1301.57C1512.26 1299.87 1513.08 1297.76 1513.08 1295.26C1513.08 1292.76 1512.26 1290.66 1510.64 1288.95C1509.07 1287.24 1507.09 1286.39 1504.71 1286.39C1502.27 1286.39 1500.24 1287.24 1498.61 1288.95C1497.05 1290.66 1496.26 1292.76 1496.26 1295.26C1496.26 1297.76 1497.05 1299.87 1498.61 1301.57ZM1511.88 1315.2C1510.73 1312.94 1508.91 1311.54 1506.41 1310.98C1504.14 1310.48 1502.06 1310.89 1500.19 1312.21C1498.32 1313.54 1497.14 1315.43 1496.64 1317.87C1496.18 1320.14 1496.48 1322.17 1497.55 1323.97C1499.22 1326.68 1500.95 1330.22 1498.58 1332.36C1498.03 1332.87 1497.43 1333.35 1496.8 1333.81C1495.91 1334.42 1495.36 1335.2 1495.17 1336.15C1494.96 1337.17 1495.21 1338.16 1495.9 1339.12C1496.59 1340.15 1497.49 1340.79 1498.63 1341.04C1499.77 1341.29 1500.85 1341.07 1501.88 1340.37C1507.64 1336.29 1511.22 1330.79 1512.62 1323.87C1513.33 1320.35 1513.08 1317.46 1511.88 1315.2Z" fill="#1649FF" />
+                        </svg>
+                        <div class="hub-tooltip">Incident Triggered!</div>
+                    </div>
+
+                    <!-- Waves -->
+                    <div class="wave w-48 h-48"></div>
+                    <div class="wave w-96 h-96"></div>
+                    <div class="wave w-[600px] h-[600px]"></div>
+
+                    <!-- Main Node: Your Company -->
+                    <div class="service-card orbit-node bg-white" id="node-company">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-server text-orange-500 text-xl"></i>
+                            <span class="text-sm font-bold text-gray-800">Your Company</span>
+                        </div>
+                        <div class="bar-graph" id="graph-company"></div>
+
+                        <!-- Notifications attached to this node -->
+                        <div id="company-team-container" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+                    </div>
+
+                    <!-- Other Nodes -->
+                    <div class="service-card orbit-node bg-white" id="node-gcp">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-brands fa-openai text-blue-600 text-xl"></i>
+                            <span class="text-xs font-bold text-gray-700">Open AI</span>
+                        </div>
+                        <div class="bar-graph" id="graph-gcp"></div>
+                    </div>
+
+                    <div class="service-card orbit-node bg-white" id="node-azure">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-brands fa-microsoft text-blue-500 text-xl"></i>
+                            <span class="text-xs font-bold text-gray-700">Azure</span>
+                        </div>
+                        <div class="bar-graph" id="graph-azure"></div>
+                    </div>
+
+                    <!-- Templates -->
+                    <div class="hidden">
+                         <div class="notif-card ml-[30px]" id="template-michelle">
+                            <div class="notif-icon bg-green-100 text-green-600"><i class="fa-solid fa-phone"></i></div>
+                            <div class="user-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-gray-800">Michelle</span>
+                                <span class="text-[10px] text-gray-500">Calling...</span>
+                            </div>
+                        </div>
+                        <div class="notif-card mt-[-10px] ml-[30px]" id="template-rahul">
+                            <div class="notif-icon bg-green-500 text-white"><i class="fa-brands fa-whatsapp"></i></div>
+                            <div class="user-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-gray-800">Rahul</span>
+                                <span class="text-[10px] text-gray-500">Sent</span>
+                            </div>
+                        </div>
+                        <div class="notif-card mt-7" id="template-team">
+                            <div class="notif-icon bg-white border border-gray-200"><i class="fa-brands fa-slack text-purple-600"></i></div>
+                            <div class="notif-icon bg-blue-100 text-blue-600"><i class="fa-solid fa-users"></i></div>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-gray-800">Dev Team</span>
+                                <span class="text-[10px] text-gray-500">#incidents</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Particles -->
+                    <div id="particles-container" class="absolute inset-0 pointer-events-none"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-12 text-center">
+            <p class="text-gray-400 text-sm font-medium mb-6">MADE WITH LOVE BY NIKHIL SHRIVASTAVA</p>
+            <div class="flex justify-center gap-8 opacity-50 grayscale">
+                 <a href="https://x.com/NikhilShri304" target="_blank"><i class="fab fa-x-twitter text-3xl"></i></a>
+                <a href="https://linkedin.com/in/nikhil304" target="_blank"><i class="fab fa-linkedin-in text-3xl"></i></a>
+                <a href="https://github.com/nikhil-304" target="_blank"><i class="fa-brands fa-github text-3xl"></i></a>
+            </div>
+        </div>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
