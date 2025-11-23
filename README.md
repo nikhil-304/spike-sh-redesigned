@@ -21,10 +21,10 @@ A modern, interactive redesign of the Spike.sh website, showcasing real-time mon
 ## 📸 Screenshots
 
 ### Rough Wireframe
-![Rough Wireframe](./screenshots/wireframe.png)
+![Rough Wireframe](./screenshots/Spike_Website%20Redesigned_Rough_Wireframe.jpg)
 
 ### Final Website Screenshot
-![Final Screenshot](./screenshots/final-screenshot.png)
+![Final Screenshot](./screenshots/Spike_Website_Redesigned_Screenshot.png)
 
 ## 🚀 Getting Started
 
